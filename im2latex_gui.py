@@ -7,7 +7,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QImage, QPixmap, QPainterPath, QFont
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon
-from cStringIO import StringIO
+from io import StringIO
 from predict import *
 import matplotlib.pyplot as plt 
 
@@ -404,7 +404,7 @@ class MainWindow(QFrame):
         idx_to_chars = lambda Y: ' '.join(map(lambda x: properties['idx_to_char'][x],Y))
         preds_chars = idx_to_chars(preds[0,1:]).replace('$','')
         latex_code = preds_chars.split('#END')[0]
-        print latex_code
+        #print latex_code
         self.Output_latex.append(latex_code)
         image_bytes = self.render_latex(latex_code, fontsize=8, dpi=300, format_='png')
         with open('formula.png', 'wb') as image_file:

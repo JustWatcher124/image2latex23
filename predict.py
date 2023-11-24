@@ -54,19 +54,19 @@ def predict(imgName):
     imgs.append(np.asarray(Image.open(imgName).convert('YCbCr'))[:,:,0][:,:,None])
     imgs = np.asarray(imgs,dtype=np.float32).transpose(0,3,1,2)
     inp_seqs = np.zeros((1,160)).astype('int32')
-    print imgs.shape
+    print (imgs.shape)
     inp_seqs[:,0] = np.load('properties.npy').tolist()['char_to_idx']['#START'] # load vocabulary dict
 
     properties = np.load('properties.npy').tolist()
     idx_to_chars = lambda Y: ' '.join(map(lambda x: properties['idx_to_char'][x],Y))
     
     # training loops
-    for i in xrange(1,160):
+    for i in range(1,160):
         inp_seqs[:,i] = sess.run(predictions,feed_dict={X:imgs,input_seqs:inp_seqs[:,:i]})
 
     np.save('pred_imgs',imgs)
     np.save('pred_latex',inp_seqs)
-    print "Saved npy files! Use Predict.ipynb to view results"
+    print ("Saved npy files! Use Predict.ipynb to view results")
     return inp_seqs
 
 

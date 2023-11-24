@@ -15,12 +15,12 @@ def data_iterator(set='train',batch_size = 32):
         batch_size - integer (Usually 32,64,128, etc.)
     '''
     train_dict = np.load(set+'_buckets.npy').tolist()
-    print "Length of %s data: "%set,np.sum([len(train_dict[x]) for x in train_dict.keys()])
+    print ("Length of %s data: "%set,np.sum([len(train_dict[x]) for x in train_dict.keys()]))
 
     for keys in train_dict.keys():
         train_list = train_dict[keys]
         N_FILES = (len(train_list)//batch_size)*batch_size
-        for batch_idx in xrange(0,N_FILES,batch_size):
+        for batch_idx in range(0,N_FILES,batch_size):
             train_sublist = train_list[batch_idx:batch_idx+batch_size]
             imgs = []
             batch_forms = []

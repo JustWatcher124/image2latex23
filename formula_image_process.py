@@ -1,5 +1,5 @@
 import numpy as np
-import re
+
 from PIL import Image
 import PIL
 
@@ -11,7 +11,7 @@ buckets = [[240,100], [320,80], [400,80],[400,100], [480,80], [480,100],\
 old_im = Image.open('./test.png').convert('L')
 old_size = (old_im.size[0]+PAD_LEFT+PAD_RIGHT, old_im.size[1]+PAD_TOP+PAD_BOTTOM)
 
-print old_size
+#print old_size
 img_data = np.asarray(old_im, dtype=np.uint8) # height, width
 nnz_inds = np.where(img_data!=255)      
 y_min = np.min(nnz_inds[0])
@@ -30,7 +30,7 @@ if j < 0:
     new_im = Image.new("RGB", new_size, (255,255,255))
     new_im.paste(old_im, (PAD_LEFT,PAD_TOP))       
 new_size = buckets[j]
-print new_size
+#print new_size
 new_im = Image.new("RGB", new_size, (255,255,255))
 new_im.paste(old_im, (PAD_LEFT,PAD_TOP))
 
